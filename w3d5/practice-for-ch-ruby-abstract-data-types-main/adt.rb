@@ -1,7 +1,7 @@
 class Stack
     def initialize
       # create ivar to store stack here!
-      s = []
+      @s = []
     end
   
     def push(el)
@@ -24,10 +24,10 @@ end
 class Queue
     def initialize
       # create ivar to store stack here!
-      q = []
+      @q = []
     end
   
-    def enqueue
+    def enqueue(el)
       # adds an element to the queue
       q << el
     end
@@ -47,7 +47,7 @@ end
 class Map
     def initialize
       # create ivar to store stack here!
-      m = []
+      @m = []
     end
   
     def set(key, value)
