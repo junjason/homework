@@ -75,8 +75,15 @@ class Map
     end
   
     def show
-      # ?
-
+      # ?? not sure what to do but outputting k-v pairs
+      print "{"
+      m.each_with_index do |kv, i|
+        print kv[0]
+        print "=>"
+        print kv[1]
+        print ", " if i != m.length-1
+      end
+      print "}"
     end
 end
   
