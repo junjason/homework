@@ -46,28 +46,29 @@ class Board
       players_i = 13
     end
 
-    picked_up = @cups[start_pos]
+    picked_up = @cups[start_pos].dup
     @cups[start_pos] = []
-    while picked_up.length > 0
+
+    while !picked_up.empty?
       start_pos += 1
-      if start_pos > @cups.length
-        start_pos = start_pos % @cups.length
-      end
+
+      start_pos = start_pos % @cups.length if start_pos >= @cups.length
+
       if start_pos != skip_i
-        next_stone = picked_up.pop
-        @cups[start_pos] << next_stone
+        @cups[start_pos] << picked_up.pop
       end
     end
+
     render
     next_turn(start_pos)
-    if @cups[start_pos].length == 0
+
+    if start_pos != players_i && start_pos != skip_i && @cups[start_pos].length == 1
       return :switch
     elsif start_pos == players_i
       return :prompt
-    elsif !@cups[start_pos].empty?
+    elsif start_pos != players_i && start_pos != skip_i && !@cups[start_pos].empty?
       return start_pos
     end
-
   end
 
   def next_turn(ending_cup_idx)
@@ -84,8 +85,24 @@ class Board
   end
 
   def one_side_empty?
+    if @cups[0..5].all? {|cup| cup.empty?} || @cups[7..12].all? {|cup| cup.empty?}
+      return true
+    end
+    false
   end
 
   def winner
+   
+      if @cups[6].length == @cups[13].length
+        return :draw
+      else
+        if @cups[6].length > @cups[13].length
+          return @name1
+        else
+          return @name2
+        end
+      end
+   
+
   end
 end
