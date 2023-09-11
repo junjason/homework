@@ -92,17 +92,14 @@ class Board
   end
 
   def winner
-   
-      if @cups[6].length == @cups[13].length
-        return :draw
+    if @cups[6].length == @cups[13].length
+      return :draw
+    else
+      if @cups[6].length > @cups[13].length
+        return @name1
       else
-        if @cups[6].length > @cups[13].length
-          return @name1
-        else
-          return @name2
-        end
+        return @name2
       end
-   
-
+    end
   end
 end
